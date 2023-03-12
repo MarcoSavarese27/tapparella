@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:tapparella/shutter_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,86 +7,55 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  final String welcomeMessage =
-      'Imposta il livello di apertura e chiusura della tapparella!';
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-        debugShowCheckedModeBanner: false,
-        theme: const CupertinoThemeData(brightness: Brightness.dark),
-        home: CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(
-              automaticallyImplyLeading: false,
-              trailing: CupertinoButton(
-                child: const Icon(CupertinoIcons.plus),
-                onPressed: () {
-                  // ignore: avoid_print
-                  print('ciao');
-                },
+    return const CupertinoApp(
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(brightness: Brightness.dark),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      child: Column(
+        children: [
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(8.0, 70.0, 8.0, 0.0),
+                child: Text(
+                  'Seleziona la tapparella, oppure aggiungine una nuova',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                  fontFamily: 'futura',
+                  ),
+                ),
               ),
             ),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 125.0, 0.0, 60.0),
-                    child: Text(
-                      welcomeMessage,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontFamily: 'futura',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  CupertinoButton.filled(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                          horizontal: 80.0),
-                      onPressed: () {},
-                      child: const Text('Aperta')),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                    child: CupertinoButton.filled(
-                        padding: const EdgeInsetsDirectional.symmetric(
-                            horizontal: 80.0),
-                        child: const Text('Chiusa'),
-                        onPressed: () {}),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                    child: CupertinoButton.filled(
-                      padding: const EdgeInsetsDirectional.symmetric(
-                                horizontal: 50.0
-                              ),
-                      child: const Text(
-                        'Persiane aperte',
-                        textAlign: TextAlign.center,
-                      ),
-                      onPressed: () {}
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 30),
-                    child: Text(
-                      'oppure imposta un valore percentuale qui sotto',
-                      style: TextStyle(
-                        fontFamily: 'futura',
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white
-                      ),
-                    ),
-                  ),
-                Row(
-                  children: const [
-                    
-                    Icon(CupertinoIcons.arrow_right)
-                  ],
-                )
-              ],
-              ),
-            )
+          Align(
+            alignment: Alignment.bottomRight,
+            child: CupertinoButton(
+              onPressed: () {
+                // ignore: avoid_print
+                print('Tapparella creata');
+              },
+              child: const Icon(CupertinoIcons.plus_app_fill),
+            ),
+          ),
+          CupertinoButton.filled(
+            child: const Text('Tapparella Sala'),
+            onPressed: () {
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => const ShutterPage()));
+            },
+          ),
+        ],
       )
     );
   }
